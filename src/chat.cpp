@@ -1,8 +1,9 @@
 #include <iostream>
 #include <SFML/Network.hpp>
+#include <SFML/System.hpp>
 
-const unsigned short PORT = 5000;
-const std::string IPADDRESS("192.168.1.66");
+const unsigned short PORT = 50001;
+const sf::IpAddress IPADDRESS("192.168.1.66");
 
 std::string sendMsg;
 
@@ -63,23 +64,18 @@ void getInput(void) {
 int main(int argc, char* argv[]) {
     sf::Thread* thread = 0;
 
-    int role = 0; // client by default
+    char role = 'c'; // client by default
+    std::cout << "Are you a server (s) or a client (c)? ";
+    std::cin >> role;
 
-    for(int i = 1; i < argc; i++) {
 
-        std::string str(argv[i]);
-
-        // this is the server
-        if(str.compare( "-s") == 0) {
-            role = 1;
-        }
-    }
-
-    if(role == 1) {
+    if(role == 's') {
         server();
     }
     else {
-        client();
+        if(!client()) {
+            std::cout << "Failed to connect." << std::endl;
+        }
     }
 
     thread = new sf::Thread(&clChat);
