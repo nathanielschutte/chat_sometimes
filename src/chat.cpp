@@ -44,6 +44,7 @@ bool client(void) {
         std::cout << "Connected" << std::endl;
         return true;
     }
+    return false;
 }
 
 void getInput(void) {
@@ -54,8 +55,8 @@ void getInput(void) {
         quit = true;
     }
     globalMutex.lock();
-    msgSend = s;
-    globalMutex = unlock();
+    sendMsg = s;
+    globalMutex.unlock();
 }
 
 
@@ -66,8 +67,10 @@ int main(int argc, char* argv[]) {
 
     for(int i = 1; i < argc; i++) {
 
+        std::string str(argv[i]);
+
         // this is the server
-        if(strcmp(argv[i], "-s") == 0) {
+        if(str.compare( "-s") == 0) {
             role = 1;
         }
     }
