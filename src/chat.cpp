@@ -4,6 +4,7 @@
 
 const unsigned short PORT = 5000;
 const sf::IpAddress IPADDRESS("192.168.2.64");
+std::string user_id;
 
 std::string sendMsg;
 
@@ -50,7 +51,7 @@ bool client(void) {
 
 void getInput(void) {
     std::string s;
-    std::cout << "\nMessage (\"exit\" to quit): ";
+    std::cout << "\nMessage (\"exit\" to quit): " << std::endl;
     getline(std::cin, s);
     if(s == "exit") {
         quit = true;
@@ -73,6 +74,9 @@ int main(int argc, char* argv[]) {
         server();
     }
     else {
+        std::cout << "What is your name? " << std::endl;
+        getline(std::cin, user_id);
+
         if(!client()) {
             std::cout << "Failed to connect." << std::endl;
         }
