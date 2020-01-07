@@ -2,8 +2,8 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 
-const unsigned short PORT = 50001;
-const sf::IpAddress IPADDRESS("192.168.1.66");
+const unsigned short PORT = 5000;
+const sf::IpAddress IPADDRESS("192.168.2.64");
 
 std::string sendMsg;
 
@@ -89,7 +89,6 @@ int main(int argc, char* argv[]) {
         thread->wait();
         delete thread;
     }
-
     return 0;
 }
 
